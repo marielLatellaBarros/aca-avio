@@ -9,7 +9,6 @@ import java.util.UUID;
 public class FlightSchedulerService {
 
     ScheduledFlightDto scheduleFlight(FlightScheduleRequest flightScheduleRequest) {
-
         return new ScheduledFlightDto(UUID.randomUUID(), flightScheduleRequest.flightNumber(), flightScheduleRequest.departure(), flightScheduleRequest.destination());
     }
 
@@ -20,5 +19,8 @@ public class FlightSchedulerService {
     List<ScheduledFlightDto> getScheduledFlights() {
         return List.of(new ScheduledFlightDto(UUID.randomUUID(), "AR9999", "AAAA", "BBBB"),
                 new ScheduledFlightDto(UUID.randomUUID(), "AR1111", "CCCC", "DDDD"));
+    }
+
+    void cancelScheduledFlight(UUID uuid) {
     }
 }

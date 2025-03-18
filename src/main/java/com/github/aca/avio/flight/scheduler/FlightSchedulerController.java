@@ -33,5 +33,10 @@ public class FlightSchedulerController {
         return ResponseEntity.ok(flightSchedulerService.getScheduledFlights());
     }
 
+    @DeleteMapping("/schedule/{uuid}")
+    public ResponseEntity<Void> cancelScheduledFlight(@PathVariable UUID uuid) {
+        flightSchedulerService.cancelScheduledFlight(uuid);
+        return ResponseEntity.noContent().build();
+    }
 
 }
