@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/flight-scheduler")
 public class FlightSchedulerController {
 
+    private final FlightSchedulerService flightSchedulerService;
+
+    public FlightSchedulerController(FlightSchedulerService flightSchedulerService) {
+        this.flightSchedulerService = flightSchedulerService;
+    }
+
     @PostMapping("/schedule")
     public String scheduleFlight() {
-        // TODO: Add implementation
-        return "Flight scheduled";
+        return flightSchedulerService.scheduleFlight().toString();
     }
 }
