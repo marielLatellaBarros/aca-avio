@@ -7,7 +7,7 @@ import java.util.UUID;
 @Service
 public class FlightSchedulerService {
 
-    UUID scheduleFlight() {
-        return UUID.randomUUID();
+    ScheduledFlightDto scheduleFlight(FlightScheduleRequest flightScheduleRequest) {
+        return new ScheduledFlightDto(UUID.randomUUID(), flightScheduleRequest.flightNumber(), flightScheduleRequest.departure(), flightScheduleRequest.destination());
     }
 }
