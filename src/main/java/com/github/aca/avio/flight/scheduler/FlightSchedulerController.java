@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -26,4 +27,11 @@ public class FlightSchedulerController {
     public ResponseEntity<ScheduledFlightDto> getScheduledFlight(@PathVariable UUID uuid) {
         return ResponseEntity.ok(flightSchedulerService.getScheduledFlight(uuid));
     }
+
+    @GetMapping("/schedule")
+    public ResponseEntity<List<ScheduledFlightDto>> getScheduledFlights() {
+        return ResponseEntity.ok(flightSchedulerService.getScheduledFlights());
+    }
+
+
 }
