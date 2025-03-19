@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.Instant;
 
 public record FlightScheduleRequest(
-        String flightNumber, // TODO: Add custom validation for ICAO flight number
+        @FlightNumber String flightNumber,
         @NotNull IcaoAirportCode departure,
         @NotNull IcaoAirportCode destination,
         @NotNull @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant departureTime,
