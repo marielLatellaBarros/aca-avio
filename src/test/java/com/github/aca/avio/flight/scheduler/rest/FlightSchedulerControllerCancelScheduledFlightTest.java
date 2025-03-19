@@ -1,5 +1,6 @@
-package com.github.aca.avio.flight.scheduler;
+package com.github.aca.avio.flight.scheduler.rest;
 
+import com.github.aca.avio.flight.scheduler.service.FlightSchedulerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

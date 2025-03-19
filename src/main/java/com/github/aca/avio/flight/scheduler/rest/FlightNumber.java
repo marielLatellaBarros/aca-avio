@@ -1,4 +1,4 @@
-package com.github.aca.avio.flight.scheduler;
+package com.github.aca.avio.flight.scheduler.rest;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

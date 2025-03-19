@@ -1,6 +1,8 @@
-package com.github.aca.avio.flight.scheduler;
+package com.github.aca.avio.flight.scheduler.rest;
 
 
+import com.github.aca.avio.flight.scheduler.service.FlightSchedulerService;
+import com.github.aca.avio.flight.scheduler.domain.ScheduledFlight;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -10,8 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.Instant;
 
-import static com.github.aca.avio.flight.scheduler.IcaoAirportCode.EBAW;
-import static com.github.aca.avio.flight.scheduler.IcaoAirportCode.SAME;
+import static com.github.aca.avio.flight.scheduler.domain.IcaoAirportCode.EBAW;
+import static com.github.aca.avio.flight.scheduler.domain.IcaoAirportCode.SAME;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -362,7 +364,7 @@ class FlightSchedulerControllerScheduleTest {
                                         """))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value("JSON parse error: Cannot deserialize value of type `com.github.aca.avio.flight.scheduler.IcaoAirportCode` from String \"ABCD\": not one of the values accepted for Enum class: [EBAW, EBBR, SAME, SAEZ]"));
+                .andExpect(jsonPath("$.message").value("JSON parse error: Cannot deserialize value of type `com.github.aca.avio.flight.scheduler.domain.IcaoAirportCode` from String \"ABCD\": not one of the values accepted for Enum class: [EBAW, EBBR, SAME, SAEZ]"));
 
         verifyNoInteractions(flightSchedulerService);
     }
@@ -406,7 +408,7 @@ class FlightSchedulerControllerScheduleTest {
                                         """))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value("JSON parse error: Cannot deserialize value of type `com.github.aca.avio.flight.scheduler.IcaoAirportCode` from String \"ABCD\": not one of the values accepted for Enum class: [EBAW, EBBR, SAME, SAEZ]"));
+                .andExpect(jsonPath("$.message").value("JSON parse error: Cannot deserialize value of type `com.github.aca.avio.flight.scheduler.domain.IcaoAirportCode` from String \"ABCD\": not one of the values accepted for Enum class: [EBAW, EBBR, SAME, SAEZ]"));
 
         verifyNoInteractions(flightSchedulerService);
     }

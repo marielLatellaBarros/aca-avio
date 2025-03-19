@@ -1,5 +1,8 @@
-package com.github.aca.avio.flight.scheduler;
+package com.github.aca.avio.flight.scheduler.rest;
 
+import com.github.aca.avio.flight.scheduler.service.FlightSchedulerService;
+import com.github.aca.avio.flight.scheduler.domain.ScheduledFlight;
+import com.github.aca.avio.flight.scheduler.service.ScheduledFlightNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -10,8 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.time.Instant;
 import java.util.UUID;
 
-import static com.github.aca.avio.flight.scheduler.IcaoAirportCode.EBAW;
-import static com.github.aca.avio.flight.scheduler.IcaoAirportCode.EBBR;
+import static com.github.aca.avio.flight.scheduler.domain.IcaoAirportCode.EBAW;
+import static com.github.aca.avio.flight.scheduler.domain.IcaoAirportCode.EBBR;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

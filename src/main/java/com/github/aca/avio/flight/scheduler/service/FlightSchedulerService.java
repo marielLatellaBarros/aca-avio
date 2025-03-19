@@ -1,5 +1,8 @@
-package com.github.aca.avio.flight.scheduler;
+package com.github.aca.avio.flight.scheduler.service;
 
+import com.github.aca.avio.flight.scheduler.domain.ScheduledFlight;
+import com.github.aca.avio.flight.scheduler.domain.ScheduledFlightRepository;
+import com.github.aca.avio.flight.scheduler.rest.FlightScheduleRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

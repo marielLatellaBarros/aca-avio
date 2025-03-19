@@ -1,5 +1,6 @@
-package com.github.aca.avio.flight.scheduler;
+package com.github.aca.avio.flight.scheduler.rest;
 
+import com.github.aca.avio.flight.scheduler.domain.IcaoAirportCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

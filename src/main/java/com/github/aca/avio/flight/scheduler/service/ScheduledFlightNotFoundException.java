@@ -1,4 +1,4 @@
-package com.github.aca.avio.flight.scheduler;
+package com.github.aca.avio.flight.scheduler.service;
 
 import java.util.UUID;
 

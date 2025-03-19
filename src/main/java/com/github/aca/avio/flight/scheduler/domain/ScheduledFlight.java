@@ -1,4 +1,4 @@
-package com.github.aca.avio.flight.scheduler;
+package com.github.aca.avio.flight.scheduler.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
