@@ -24,7 +24,7 @@ public class FlightSchedulerService {
     }
 
     public ScheduledFlight getScheduledFlight(UUID uuid) {
-        return scheduledFlightRepository.findByUuid(uuid).orElseThrow();
+        return scheduledFlightRepository.findByUuid(uuid).orElseThrow(() -> new ScheduledFlightNotFoundException(uuid));
     }
 
     public List<ScheduledFlight> getScheduledFlights() {

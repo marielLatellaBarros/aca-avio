@@ -1,5 +1,6 @@
 package com.github.aca.avio.flight.scheduler;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -25,6 +26,13 @@ public class FlightSchedulerExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", ex.getMessage());
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(ScheduledFlightNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleScheduledFlightNotFoundException(ScheduledFlightNotFoundException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
 
 }

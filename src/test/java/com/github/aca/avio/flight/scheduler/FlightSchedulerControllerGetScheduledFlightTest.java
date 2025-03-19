@@ -8,6 +8,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.Instant;
+import java.util.UUID;
 
 import static com.github.aca.avio.flight.scheduler.IcaoAirportCode.EBAW;
 import static com.github.aca.avio.flight.scheduler.IcaoAirportCode.EBBR;
@@ -48,5 +49,19 @@ class FlightSchedulerControllerGetScheduledFlightTest {
                 .andExpect(jsonPath("$.arrivalTime").value(LOCAL_ARRIVAL_TIME));
 
         verify(flightSchedulerService).getScheduledFlight(scheduledFlight.getUuid());
+    }
+
+    @Test
+    void shouldReturnNotFoundForNonExistingScheduledFlight() throws Exception {
+        UUID randomUuid = UUID.randomUUID();
+        when(flightSchedulerService.getScheduledFlight(randomUuid)).thenThrow(new ScheduledFlightNotFoundException(randomUuid));
+
+        this.mockMvc.perform(get("/api/flight-scheduler/schedule/{uuid}", randomUuid)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("Scheduled flight with uuid '" + randomUuid + "' not found"));
+
+        verify(flightSchedulerService).getScheduledFlight(randomUuid);
     }
 }
