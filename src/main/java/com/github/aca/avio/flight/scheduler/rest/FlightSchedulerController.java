@@ -1,5 +1,7 @@
 package com.github.aca.avio.flight.scheduler.rest;
 
+import com.github.aca.avio.flight.scheduler.domain.IcaoAirportCode;
+import com.github.aca.avio.flight.scheduler.domain.ScheduledFlight;
 import com.github.aca.avio.flight.scheduler.service.FlightSchedulerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,11 +45,18 @@ public class FlightSchedulerController {
     }
 
     @GetMapping("/schedule/search")
-    @ResponseStatus(HttpStatus.OK) // TODO: Add test
-    public List<ScheduledFlightDto> searchScheduledFlights(@RequestParam String flightNumber) {
-        var scheduledFlights = flightSchedulerService.searchScheduledFlights(flightNumber);
-        return scheduledFlights.stream().map(scheduledFlight ->
-                modelMapper.map(scheduledFlight, ScheduledFlightDto.class)).toList();
+    @ResponseStatus(HttpStatus.OK)
+    public List<ScheduledFlightDto> searchScheduledFlights(@RequestParam(required = false) String flightNumber,
+                                                           @RequestParam(required = false) IcaoAirportCode departure,
+                                                           @RequestParam(required = false) IcaoAirportCode destination,
+                                                           @RequestParam(required = false) Instant departureTimeAfter,
+                                                           @RequestParam(required = false) Instant departureTimeBefore,
+                                                           @RequestParam(required = false) Instant arrivalTimeAfter,
+                                                           @RequestParam(required = false) Instant arrivalTimeBefore) {
+        List<ScheduledFlight> scheduledFlights = flightSchedulerService.searchScheduledFlights(flightNumber, departure,
+                destination, departureTimeAfter, departureTimeBefore, arrivalTimeAfter, arrivalTimeBefore);
+        return scheduledFlights.stream().map(
+                scheduledFlight -> modelMapper.map(scheduledFlight, ScheduledFlightDto.class)).toList();
     }
 
     @DeleteMapping("/schedule/{uuid}")
