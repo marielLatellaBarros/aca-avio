@@ -1,0 +1,23 @@
+### Schedule a flight
+POST http://localhost:8080/api/flight-scheduler/schedule
+Content-Type: application/json
+
+{
+  "departure": "SAEZ",
+  "destination": "EBAW",
+  "flightNumber": "AR2222A",
+  "departureTime": "2022-12-12T12:00:00Z",
+  "arrivalTime": "2022-12-12T18:00:00-05:00"
+}
+
+### Retrieve a scheduled flight
+GET http://localhost:8080/api/flight-scheduler/schedule/c201319a-c4b1-4917-95ae-9603c1eaaa2d
+Accept: application/json
+
+### Retrieve all scheduled flights
+GET http://localhost:8080/api/flight-scheduler/schedule
+Accept: application/json
+
+### Cancel a scheduled flight
+DELETE http://localhost:8080/api/flight-scheduler/schedule/c201319a-c4b1-4917-95ae-9603c1eaaa2d
+
