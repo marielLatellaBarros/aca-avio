@@ -1,26 +1,42 @@
 package com.github.aca.avio.flight.scheduler;
 
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-// TODO: Implement repository/ domain logic
+
 @Service
+@RequiredArgsConstructor
 public class FlightSchedulerService {
 
-    ScheduledFlightDto scheduleFlight(FlightScheduleRequest flightScheduleRequest) {
-        return new ScheduledFlightDto(UUID.randomUUID(), flightScheduleRequest.flightNumber(), flightScheduleRequest.departure(), flightScheduleRequest.destination());
+    private final ScheduledFlightRepository scheduledFlightRepository;
+
+    public ScheduledFlight scheduleFlight(FlightScheduleRequest flightScheduleRequest) {
+        ScheduledFlight scheduledFlightJpaEntity = new ScheduledFlight(
+                flightScheduleRequest.flightNumber(),
+                flightScheduleRequest.departure(),
+                flightScheduleRequest.destination(),
+                flightScheduleRequest.departureTime(),
+                flightScheduleRequest.arrivalTime());
+        return scheduledFlightRepository.save(scheduledFlightJpaEntity);
     }
 
-    ScheduledFlightDto getScheduledFlight(UUID uuid) {
-        return new ScheduledFlightDto(uuid, "AR9999", "AAAA", "ZZZZ");
+    public ScheduledFlight getScheduledFlight(UUID uuid) {
+        return scheduledFlightRepository.findByUuid(uuid).orElseThrow();
     }
 
-    List<ScheduledFlightDto> getScheduledFlights() {
-        return List.of(new ScheduledFlightDto(UUID.randomUUID(), "AR9999", "AAAA", "BBBB"),
-                new ScheduledFlightDto(UUID.randomUUID(), "AR1111", "CCCC", "DDDD"));
+    public List<ScheduledFlight> getScheduledFlights() {
+        return scheduledFlightRepository.findAll();
     }
 
-    void cancelScheduledFlight(UUID uuid) {
+    public List<ScheduledFlight> searchScheduledFlights(String flightNumber) {
+        return scheduledFlightRepository.findByFlightNumber(flightNumber);
+    }
+
+    @Transactional
+    public void cancelScheduledFlight(UUID uuid) {
+        scheduledFlightRepository.deleteByUuid(uuid);
     }
 }
