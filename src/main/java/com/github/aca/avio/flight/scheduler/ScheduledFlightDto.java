@@ -1,6 +1,23 @@
 package com.github.aca.avio.flight.scheduler;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.Instant;
 import java.util.UUID;
 
-public record ScheduledFlightDto(UUID uuid, String flightNumber, String departure, String destination) {}
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public final class ScheduledFlightDto {
+    private UUID uuid;
+    private String flightNumber;
+    private IcaoAirportCode departure;
+    private IcaoAirportCode destination;
+    private Instant departureTime;
+    private Instant arrivalTime;
+}
 
