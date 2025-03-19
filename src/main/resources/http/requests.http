@@ -1,6 +1,7 @@
 ### Schedule a flight
 POST http://localhost:8080/api/flight-scheduler/schedule
 Content-Type: application/json
+Accept: application/json
 
 {
   "departure": "SAEZ",
