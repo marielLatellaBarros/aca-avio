@@ -58,6 +58,19 @@ class FlightSchedulerControllerSearchScheduledFlightsTest {
                 .andExpect(jsonPath("$[1].departureTime").value(DEPARTURE_TIME_2))
                 .andExpect(jsonPath("$[1].arrivalTime").value(LOCAL_ARRIVAL_TIME_2));
 
-        verify(flightSchedulerService).searchScheduledFlights("AR1234");
+        verify(flightSchedulerService).searchScheduledFlights(FLIGHT_NUMBER);
+    }
+
+    @Test
+    void shouldReturnEmptyListWhenNoScheduledFlightsFoundForGivenFlightNumberRequestParam() throws Exception {
+        when(flightSchedulerService.searchScheduledFlights(FLIGHT_NUMBER)).thenReturn(List.of());
+
+        this.mockMvc.perform(get("/api/flight-scheduler/schedule/search?flightNumber=AR1234")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+
+        verify(flightSchedulerService).searchScheduledFlights(FLIGHT_NUMBER);
     }
 }
