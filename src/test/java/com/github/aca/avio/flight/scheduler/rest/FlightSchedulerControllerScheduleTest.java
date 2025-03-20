@@ -1,8 +1,9 @@
 package com.github.aca.avio.flight.scheduler.rest;
 
 
-import com.github.aca.avio.flight.scheduler.service.FlightSchedulerService;
 import com.github.aca.avio.flight.scheduler.domain.ScheduledFlight;
+import com.github.aca.avio.flight.scheduler.service.FlightSchedulerService;
+import com.github.aca.avio.flight.scheduler.service.exception.DepartureTimeCannotBeAfterArrivalTimeException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -435,7 +436,33 @@ class FlightSchedulerControllerScheduleTest {
         verifyNoInteractions(flightSchedulerService);
     }
 
-    @Test // TODO: if time allows parse error message
+    @Test
+    void shouldReturnBadRequestAndErrorMessageWhenDepartureDateIsAfterArrivalDate() throws Exception {
+        var flightScheduleRequest = new FlightScheduleRequest(FLIGHT_NUMBER, EBAW, SAME, Instant.parse(ARRIVAL_TIME), Instant.parse(DEPARTURE_TIME));
+        when(flightSchedulerService.scheduleFlight(flightScheduleRequest)).thenThrow(new DepartureTimeCannotBeAfterArrivalTimeException(Instant.parse(DEPARTURE_TIME), Instant.parse(ARRIVAL_TIME)));
+
+        this.mockMvc.perform(
+                        post("/api/flight-scheduler/schedule")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .content("""
+                                             {
+                                              "flightNumber": "AR9999",
+                                              "departure": "EBAW",
+                                              "destination": "SAME",
+                                              "arrivalTime": "2022-12-12T12:00:00Z",
+                                              "departureTime": "2022-12-12T18:00:00-05:00"
+                                            }
+                                        """))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Departure time 2022-12-12T12:00:00Z cannot happen after arrival time 2022-12-12T23:00:00Z"));
+
+        verify(flightSchedulerService).scheduleFlight(flightScheduleRequest);
+    }
+
+    @Test
+        // TODO: if time allows parse error message
     void shouldReturnBadRequestAndErrorMessageWhenDepartureTimeHasIncorrectFormat() throws Exception {
         this.mockMvc.perform(
                         post("/api/flight-scheduler/schedule")
@@ -457,7 +484,8 @@ class FlightSchedulerControllerScheduleTest {
         verifyNoInteractions(flightSchedulerService);
     }
 
-    @Test // TODO: if time allows parse error message
+    @Test
+        // TODO: if time allows parse error message
     void shouldReturnBadRequestAndErrorMessageWhenArrivalTimeIsNull() throws Exception {
         this.mockMvc.perform(
                         post("/api/flight-scheduler/schedule")
@@ -479,7 +507,8 @@ class FlightSchedulerControllerScheduleTest {
         verifyNoInteractions(flightSchedulerService);
     }
 
-    @Test // TODO: if time allows parse error message
+    @Test
+        // TODO: if time allows parse error message
     void shouldReturnBadRequestAndErrorMessageWhenArrivalTimeHasIncorrectFormat() throws Exception {
         this.mockMvc.perform(
                         post("/api/flight-scheduler/schedule")

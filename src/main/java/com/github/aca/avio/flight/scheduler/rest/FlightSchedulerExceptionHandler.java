@@ -1,5 +1,6 @@
 package com.github.aca.avio.flight.scheduler.rest;
 
+import com.github.aca.avio.flight.scheduler.service.exception.DepartureTimeCannotBeAfterArrivalTimeException;
 import com.github.aca.avio.flight.scheduler.service.exception.ScheduledFlightNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,13 @@ public class FlightSchedulerExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", ex.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DepartureTimeCannotBeAfterArrivalTimeException.class)
+    public ResponseEntity<Map<String, String>> handleScheduledFlightNotFoundException(DepartureTimeCannotBeAfterArrivalTimeException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
 }
