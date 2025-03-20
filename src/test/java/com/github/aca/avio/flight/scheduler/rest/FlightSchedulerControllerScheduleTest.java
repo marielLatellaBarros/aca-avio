@@ -348,7 +348,7 @@ class FlightSchedulerControllerScheduleTest {
     }
 
 
-    @Test // TODO: if time allows parse error message
+    @Test
     void shouldReturnBadRequestAndErrorMessageWhenDepartureIsInvalid() throws Exception {
         this.mockMvc.perform(
                         post("/api/flight-scheduler/schedule")
@@ -370,7 +370,7 @@ class FlightSchedulerControllerScheduleTest {
         verifyNoInteractions(flightSchedulerService);
     }
 
-    @Test // TODO: if time allows parse error message
+    @Test
     void shouldReturnBadRequestAndErrorMessageWhenDestinationIsNull() throws Exception {
         this.mockMvc.perform(
                         post("/api/flight-scheduler/schedule")
@@ -392,7 +392,7 @@ class FlightSchedulerControllerScheduleTest {
         verifyNoInteractions(flightSchedulerService);
     }
 
-    @Test // TODO: if time allows parse error message
+    @Test
     void shouldReturnBadRequestAndErrorMessageWhenDestinationIsInvalid() throws Exception {
         this.mockMvc.perform(
                         post("/api/flight-scheduler/schedule")
@@ -414,7 +414,7 @@ class FlightSchedulerControllerScheduleTest {
         verifyNoInteractions(flightSchedulerService);
     }
 
-    @Test // TODO: if time allows parse error message
+    @Test
     void shouldReturnBadRequestAndErrorMessageWhenDepartureTimeIsNull() throws Exception {
         this.mockMvc.perform(
                         post("/api/flight-scheduler/schedule")
@@ -462,7 +462,6 @@ class FlightSchedulerControllerScheduleTest {
     }
 
     @Test
-        // TODO: if time allows parse error message
     void shouldReturnBadRequestAndErrorMessageWhenDepartureTimeHasIncorrectFormat() throws Exception {
         this.mockMvc.perform(
                         post("/api/flight-scheduler/schedule")
@@ -485,7 +484,6 @@ class FlightSchedulerControllerScheduleTest {
     }
 
     @Test
-        // TODO: if time allows parse error message
     void shouldReturnBadRequestAndErrorMessageWhenArrivalTimeIsNull() throws Exception {
         this.mockMvc.perform(
                         post("/api/flight-scheduler/schedule")
@@ -508,7 +506,6 @@ class FlightSchedulerControllerScheduleTest {
     }
 
     @Test
-        // TODO: if time allows parse error message
     void shouldReturnBadRequestAndErrorMessageWhenArrivalTimeHasIncorrectFormat() throws Exception {
         this.mockMvc.perform(
                         post("/api/flight-scheduler/schedule")
@@ -529,6 +526,4 @@ class FlightSchedulerControllerScheduleTest {
 
         verifyNoInteractions(flightSchedulerService);
     }
-
-    // TODO: if time allows test composite errors
 }
