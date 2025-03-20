@@ -2,6 +2,7 @@ package com.github.aca.avio.flight.scheduler.service;
 
 import com.github.aca.avio.flight.scheduler.domain.ScheduledFlight;
 import com.github.aca.avio.flight.scheduler.domain.ScheduledFlightRepository;
+import com.github.aca.avio.flight.scheduler.service.exception.ScheduledFlightNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
