@@ -1,6 +1,6 @@
 package com.github.aca.avio.flight.scheduler.rest;
 
-import com.github.aca.avio.flight.scheduler.service.ScheduledFlightNotFoundException;
+import com.github.aca.avio.flight.scheduler.service.exception.ScheduledFlightNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;

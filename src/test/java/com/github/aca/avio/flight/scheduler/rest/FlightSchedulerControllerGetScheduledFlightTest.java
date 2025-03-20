@@ -2,7 +2,7 @@ package com.github.aca.avio.flight.scheduler.rest;
 
 import com.github.aca.avio.flight.scheduler.service.FlightSchedulerService;
 import com.github.aca.avio.flight.scheduler.domain.ScheduledFlight;
-import com.github.aca.avio.flight.scheduler.service.ScheduledFlightNotFoundException;
+import com.github.aca.avio.flight.scheduler.service.exception.ScheduledFlightNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
