@@ -7,7 +7,7 @@ Execute the command ```control + C```
 
 
 # OpenAPI - Swagger UI
-[Open API](http://localhost:8080/swagger-ui/index.html){:target="_blank"}
+[Open API](http://localhost:8080/swagger-ui/index.html)
 
 
 # Sample requests
