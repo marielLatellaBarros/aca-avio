@@ -6,7 +6,7 @@ After cloning the repository locally, go to the repository folder and execute:
 Execute the command ```control + C```
 
 
-# OpenAPI 
+# OpenAPI - Swagger UI
 ```http://localhost:8080/swagger-ui/index.html```
 
 
