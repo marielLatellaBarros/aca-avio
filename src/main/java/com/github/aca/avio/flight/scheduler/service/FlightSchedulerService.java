@@ -75,7 +75,7 @@ public class FlightSchedulerService {
     }
 
     @Transactional
-    public void cancelScheduledFlight(UUID uuid) { // TODO: Bad request if not a valid UUID
+    public void cancelScheduledFlight(UUID uuid) {
         scheduledFlightRepository.deleteByUuid(uuid);
     }
 }
